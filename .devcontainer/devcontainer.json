@@ -1,17 +1,8 @@
 {
-  "name": "Full-Stack Development",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
-  "features": {
-    "ghcr.io/devcontainers/features/dotnet:2": {
-      "version": "8.0"
-    },
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "22"
-    },
-    "ghcr.io/devcontainers/features/mongodb:1": {
-      "version": "6.0"
-    },
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+  "name": "Full-Stack Development Environment",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
   },
   "forwardPorts": [5000, 3000, 27017, 1433],
   "portsAttributes": {
@@ -23,16 +14,15 @@
       "label": "Node.js App",
       "onAutoForward": "notify"
     },
-    "1433": {
-      "label": "SQL Server",
-      "onAutoForward": "silent"
-    },
     "27017": {
       "label": "MongoDB",
       "onAutoForward": "silent"
+    },
+    "1433": {
+      "label": "SQL Server",
+      "onAutoForward": "silent"
     }
   },
-  "postCreateCommand": "bash .devcontainer/setup.sh",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -40,7 +30,17 @@
         "ms-vscode.vscode-node-azure-pack",
         "ms-mssql.mssql",
         "mongodb.mongodb-vscode"
-      ]
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "dotnet.defaultSolution": "**/*.sln"
+      }
     }
-  }
+  },
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  "remoteUser": "vscode"
 }

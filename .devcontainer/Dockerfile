@@ -1,15 +1,77 @@
+# Use a imagem base oficial do Ubuntu 22.04
 FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
+
+# Metadados da imagem
+LABEL maintainer="Seu Nome" \
+      description="Ambiente de desenvolvimento full-stack com .NET, Node.js, MongoDB e SQL Server"
+
+# Variáveis de ambiente
+ENV DOTNET_ROOT=/usr/share/dotnet \
+    PATH="$PATH:/usr/share/dotnet:/opt/mssql-tools18/bin" \
+    ASPNETCORE_URLS=http://+:5000 \
+    NODE_VERSION=22.x
 
 # Instalar dependências do sistema
 RUN apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
     curl \
-    git \
     wget \
-    unzip \
+    gnupg \
+    software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-# Configurar ambiente
-ENV DOTNET_ROOT=/usr/share/dotnet
-ENV PATH="$PATH:/usr/share/dotnet:/opt/mssql-tools18/bin"
-ENV ASPNETCORE_URLS=http://+:5000
+# Instalar Node.js 22
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_VERSION nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install -y nodejs
+
+# Instalar .NET 8 SDK
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    dotnet-sdk-8.0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar MongoDB
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | gpg --dearmor -o /usr/share/keyrings/mongodb.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/mongodb.gpg] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    mongodb-org \
+    mongodb-org-server \
+    mongodb-org-mongos \
+    mongodb-org-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar SQL Server ODBC Driver e ferramentas
+RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/22.04/prod jammy main" | tee /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update && \
+    ACCEPT_EULA=Y apt-get install -y --no-install-recommends \
+    msodbcsql18 \
+    mssql-tools18 \
+    unixodbc-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instalar ferramentas globais do Node.js
+RUN npm install -g --silent \
+    nodemon \
+    typescript \
+    ts-node \
+    @angular/cli
+
+# Configurar diretório de trabalho
+WORKDIR /workspace
+
+# Configurar serviços para inicialização automática
+COPY start-services.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/start-services.sh
+
+# Expor portas necessárias
+EXPOSE 5000    # .NET API
+EXPOSE 3000    # Node.js
+EXPOSE 27017   # MongoDB
+EXPOSE 1433    # SQL Server
+
+# Script de inicialização simplificado
+CMD ["/usr/local/bin/start-services.sh"]
