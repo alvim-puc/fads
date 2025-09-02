@@ -58,6 +58,7 @@ RUN npm install -g --silent \
     nodemon \
     typescript \
     ts-node \
+    @angular/cli
 
 # Expor portas necessárias
 # .NET API
