@@ -2,11 +2,14 @@
 FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 
 # Metadados da imagem
-LABEL maintainer="Seu Nome" \
+LABEL maintainer="Bernardo Alvim" \
       description="Ambiente de desenvolvimento full-stack com .NET, Node.js, MongoDB e SQL Server"
 
-# Variáveis de ambiente
-ENV DOTNET_ROOT=/usr/share/dotnet \
+# Variáveis de ambiente para SQL Server
+ENV ACCEPT_EULA=Y \
+    MSSQL_SA_PASSWORD=Admin123! \
+    MSSQL_PID=Developer \
+    DOTNET_ROOT=/usr/share/dotnet \
     PATH="$PATH:/usr/share/dotnet:/opt/mssql-tools18/bin" \
     ASPNETCORE_URLS=http://+:5000 \
     NODE_VERSION=22.x
@@ -19,6 +22,14 @@ RUN apt-get update && \
     gnupg \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
+
+# Instalar SQL Server
+RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022 jammy main" | sudo tee /etc/apt/sources.list.d/mssql-server.list && \
+    apt-get update && \
+    apt-get install -y mssql-server && \
+    /opt/mssql/bin/mssql-conf setup accept-eula accept-eula-licensed && \
+    apt-get clean
 
 # Instalar Node.js 22
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
