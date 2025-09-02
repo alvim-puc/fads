@@ -2,7 +2,10 @@
   "name": "Full-Stack Development Environment",
   "build": {
     "dockerfile": "Dockerfile",
-    "context": ".."
+    "context": "..",
+    "args": {
+      "VARIANT": "ubuntu-22.04"
+    }
   },
   "forwardPorts": [5000, 3000, 27017, 1433],
   "portsAttributes": {
