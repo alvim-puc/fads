@@ -23,12 +23,12 @@ RUN apt-get update && \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalar SQL Server
+# Instalar SQL Server (CORRIGIDO - removido accept-eula-licensed)
 RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg && \
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022 jammy main" | sudo tee /etc/apt/sources.list.d/mssql-server.list && \
     apt-get update && \
     apt-get install -y mssql-server && \
-    /opt/mssql/bin/mssql-conf setup accept-eula accept-eula-licensed && \
+    /opt/mssql/bin/mssql-conf setup accept-eula && \
     apt-get clean
 
 # Instalar Node.js 22
