@@ -68,10 +68,14 @@ COPY start-services.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start-services.sh
 
 # Expor portas necessárias
-EXPOSE 5000    # .NET API
-EXPOSE 3000    # Node.js
-EXPOSE 27017   # MongoDB
-EXPOSE 1433    # SQL Server
+# .NET API
+EXPOSE 5000
+# Node.js
+EXPOSE 3000
+# MongoDB
+EXPOSE 27017
+# SQL Server
+EXPOSE 1433
 
 # Script de inicialização simplificado
 CMD ["/usr/local/bin/start-services.sh"]
