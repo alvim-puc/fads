@@ -2,7 +2,7 @@
   "name": "Fullstack Dev Environment",
   "dockerComposeFile": ["docker-compose.yml"],
   "service": "app",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/workspaces/fads",
 
   "customizations": {
     "vscode": {

@@ -3,10 +3,10 @@ version: '3.8'
 services:
   app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
     volumes:
-      - fads_volume:/workspace
+      - .:/workspaces/fads
     ports:
       - "3000:3000"
     command: /bin/bash
@@ -29,5 +29,4 @@ services:
       - mongodb_data:/data/db
 
 volumes:
-  fads_volume:
   mongodb_data:

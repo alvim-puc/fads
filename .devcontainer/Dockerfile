@@ -19,10 +19,3 @@ WORKDIR /workspace
 
 # Instale ferramentas e dependências adicionais
 RUN apt-get install -y git
-
-# Defina o diretório de trabalho
-WORKDIR /workspace
-
-# Copie os arquivos do projeto para o contêiner.
-# A pasta `.` aqui se refere à raiz do seu projeto.
-COPY . .
