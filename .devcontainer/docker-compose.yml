@@ -5,7 +5,6 @@ services:
       dockerfile: .devcontainer/Dockerfile
     volumes:
       - .:/workspaces/fads
-    command: /bin/bash
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -25,4 +24,5 @@ services:
       - mongodb_data:/data/db
 
 volumes:
+
   mongodb_data:
