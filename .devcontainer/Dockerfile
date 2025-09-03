@@ -1,6 +1,13 @@
 # Use a imagem do Node.js como base, pois ela já vem com o Node e o NPM.
 FROM node:22-bullseye
 
+RUN apt-get update && apt-get install -y \
+    sudo \
+    wget \
+    curl \
+    gnupg \
+    apt-transport-https
+
 # Instale o .NET SDK
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
     && sudo dpkg -i packages-microsoft-prod.deb \
@@ -18,4 +25,5 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
 WORKDIR /workspace
 
 # Instale ferramentas e dependências adicionais
+
 RUN apt-get install -y git
