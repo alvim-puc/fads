@@ -20,10 +20,14 @@ RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod
     && apt-get install -y dotnet-sdk-6.0
 
 # Instala o cliente MSSQL
-RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null \
-    && echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main" | tee /etc/apt/sources.list.d/mssql-tools.list \
-    && apt-get update \
-    && **ACCEPT_EULA=Y** apt-get install -y mssql-tools unixodbc-dev
+RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --batch --yes --dearmor -o /usr/share/keyrings/microsoft.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/22.04/prod jammy main" | tee /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update && \
+    ACCEPT_EULA=Y apt-get install -y --no-install-recommends \
+    msodbcsql18 \
+    mssql-tools \
+    unixodbc-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Instala ferramentas e dependências adicionais
 RUN apt-get install -y git
@@ -34,3 +38,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Configura o diretório de trabalho.
 
 WORKDIR /workspaces/fads
+
