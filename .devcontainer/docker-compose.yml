@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ..:/workspace
+      - fads_volume:/workspace
     ports:
       - "3000:3000"
     command: /bin/bash
@@ -29,4 +29,5 @@ services:
       - mongodb_data:/data/db
 
 volumes:
+  fads_volume:
   mongodb_data:
