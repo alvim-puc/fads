@@ -23,7 +23,7 @@ RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod
 RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null \
     && echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main" | tee /etc/apt/sources.list.d/mssql-tools.list \
     && apt-get update \
-    && apt-get install -y mssql-tools unixodbc-dev
+    && **ACCEPT_EULA=Y** apt-get install -y mssql-tools unixodbc-dev
 
 # Instala ferramentas e dependências adicionais
 RUN apt-get install -y git
@@ -32,4 +32,5 @@ RUN apt-get install -y git
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Configura o diretório de trabalho.
+
 WORKDIR /workspaces/fads
