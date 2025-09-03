@@ -1,44 +1,24 @@
 {
-  "name": "Full-Stack Development Environment",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "..",
-    "args": {
-      "VARIANT": "ubuntu-22.04"
-    }
-  },
-  "forwardPorts": [5000, 3000, 27017, 1433],
-  "portsAttributes": {
-    "5000": {
-      "label": "ASP.NET API",
-      "onAutoForward": "notify"
-    },
-    "3000": {
-      "label": "Node.js App",
-      "onAutoForward": "notify"
-    },
-    "27017": {
-      "label": "MongoDB",
-      "onAutoForward": "silent"
-    },
-    "1433": {
-      "label": "SQL Server",
-      "onAutoForward": "silent"
-    }
-  },
+  "name": "Fullstack Dev Environment",
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/workspace",
+
   "customizations": {
     "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
       "extensions": [
         "ms-dotnettools.csharp",
-        "ms-vscode.vscode-node-azure-pack",
-        "ms-mssql.mssql",
-        "mongodb.mongodb-vscode"
-      ],
-      "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash",
-        "dotnet.defaultSolution": "**/*.sln"
-      }
+        "ms-vscode.node-debugger",
+        "mongodb.mongodb-vscode",
+        "ms-mssql.mssql"
+      ]
     }
   },
-  "remoteUser": "vscode"
+  
+  "forwardPorts": [3000, 1433, 27017],
+
+  "postCreateCommand": "npm install && dotnet restore"
 }
