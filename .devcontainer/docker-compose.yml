@@ -6,10 +6,13 @@ services:
       context: ..
       dockerfile: .devcontainer/Dockerfile
     volumes:
-      - .:/workspaces/fads
+      - .:/workspaces/fads:cached
     ports:
-      - "3000:3000"
-    command: /bin/bash
+      - "5000:5000"  # .NET API
+      - "3000:3000"  # Node.js
+    depends_on:
+      - sqlserver
+      - mongodb
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -18,10 +21,13 @@ services:
       - "1433:1433"
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=Admin123!
+      - MSSQL_SA_PASSWORD=Admin123!
+      - MSSQL_PID=Developer
+    volumes:
+      - mssql-data:/var/opt/mssql
 
   mongodb:
-    image: mongo:latest
+    image: mongo:6.0  # Versão específica (mais estável)
     container_name: mongodb_server
     ports:
       - "27017:27017"
@@ -30,3 +36,4 @@ services:
 
 volumes:
   mongodb_data:
+  mssql-data:

@@ -1,24 +1,27 @@
 {
   "name": "Fullstack Dev Environment",
-  "dockerComposeFile": ["docker-compose.yml"],
+  "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces/fads",
 
   "customizations": {
+    "codespaces": {
+      "timeout": "30m"
+    },
     "vscode": {
       "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
+        "terminal.integrated.defaultProfile.linux": "bash"
       },
       "extensions": [
         "ms-dotnettools.csharp",
-        "ms-vscode.node-debugger",
+        "ms-vscode.vscode-node-azure-pack",
         "mongodb.mongodb-vscode",
         "ms-mssql.mssql"
       ]
     }
   },
   
-  "forwardPorts": [3000, 1433, 27017],
+  "forwardPorts": [5000, 3000, 1433, 27017],
 
   "postCreateCommand": "npm install && dotnet restore"
 }
