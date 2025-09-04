@@ -5,7 +5,6 @@ services:
       dockerfile: .devcontainer/Dockerfile
     volumes:
       - ..:/workspaces/fads
-    command: sleep infinity
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -27,6 +26,7 @@ services:
 volumes:
 
   mongodb_data:
+
 
 
 
