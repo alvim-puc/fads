@@ -1,8 +1,5 @@
 FROM node:22-bullseye
 
-# Configura o APT para não pedir confirmação.
-ARG DEBIAN_FRONTEND=noninteractive
-
 # Instala ferramentas essenciais.
 RUN apt-get update && apt-get install -y \
     sudo \
@@ -35,7 +32,4 @@ RUN apt-get install -y git
 # Limpa o cache do APT para reduzir o tamanho da imagem.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Configura o diretório de trabalho.
-
-WORKDIR /workspaces/fads
 
