@@ -4,7 +4,7 @@ services:
       context: ..
       dockerfile: .devcontainer/Dockerfile
     volumes:
-      - .:/workspaces/fads
+      - ..:/workspaces/fads
     command: sleep infinity
 
   sqlserver:
@@ -27,5 +27,6 @@ services:
 volumes:
 
   mongodb_data:
+
 
 
