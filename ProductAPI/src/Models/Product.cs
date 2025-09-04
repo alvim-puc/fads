@@ -6,31 +6,30 @@ namespace ProductAPI.Models
     {
         [Key]
         public int Id { get; set; }
-        
+
         [Required]
         [StringLength(100)]
-        public string? Name { get; set; }
-        
+        public required string Nome { get; set; }
+
         [Required]
         [StringLength(50)]
-        public string? Code { get; set; }
-        
+        public required string Codigo { get; set; }
+
         [Required]
         [Range(0.01, double.MaxValue)]
-        public decimal Price { get; set; }
-        
+        public decimal Preco { get; set; }
+
         [StringLength(500)]
-        public string? Description { get; set; }
-        
+        public required string Descricao { get; set; }
+
         [Required]
         [Range(0, int.MaxValue)]
-        public int StockQuantity { get; set; }
-        
-        [Range(0, 5)]
-        public decimal Rating { get; set; }
-        
-        [Required]
+        public int QuantidadeEmEstoque { get; set; }
+
+        [Range(1, 5)]
+        public float Avaliacao { get; set; }
+
         [StringLength(50)]
-        public string? Category { get; set; }
+        public required string Categoria { get; set; }
     }
 }

@@ -14,7 +14,7 @@ RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod
     && dpkg -i packages-microsoft-prod.deb \
     && rm packages-microsoft-prod.deb \
     && apt-get update \
-    && apt-get install -y dotnet-sdk-6.0
+    && apt-get install -y dotnet-sdk-8.0
 
 # Instala o cliente MSSQL
 RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --batch --yes --dearmor -o /usr/share/keyrings/microsoft.gpg && \
