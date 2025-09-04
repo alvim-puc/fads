@@ -18,7 +18,5 @@
     }
   },
   
-  "forwardPorts": [1433, 27017],
-
-  "postCreateCommand": "npm install && dotnet restore"
+  "forwardPorts": [1433, 27017]
 }

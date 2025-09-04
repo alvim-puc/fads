@@ -64,6 +64,13 @@ namespace ProductAPI.Controllers
             return NoContent();
         }
 
+        [HttpPatch("{code}")]
+        public async Task<IActionResult> PatchProduct(string code, [FromBody] Dictionary<string, object> updates)
+        {
+            await _productService.PatchProductAsync(code, updates);
+            return NoContent();
+        }
+
         [HttpDelete("{code}")]
         public async Task<IActionResult> DeleteProduct(string code)
         {

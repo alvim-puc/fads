@@ -57,5 +57,21 @@ namespace ProductAPI.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
+        internal async Task PatchProductAsync(string code, Dictionary<string, object> updates)
+        {
+            var product = await GetProductByCodeAsync(code) ?? throw new KeyNotFoundException("Product not found");
+            foreach (var update in updates)
+            {
+                var propertyInfo = typeof(Product).GetProperty(update.Key);
+                if (propertyInfo != null && propertyInfo.CanWrite)
+                {
+                    propertyInfo.SetValue(product, Convert.ChangeType(update.Value, propertyInfo.PropertyType));
+                }
+            }
+
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
+        }
     }
 }
