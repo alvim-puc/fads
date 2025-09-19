@@ -1,0 +1,282 @@
+# Teste Automatizado da API User
+
+## POST
+```
+{
+  "etapa": "POST",
+  "user": {
+    "nome": "João",
+    "email": "joao@email.com",
+    "senha": "123",
+    "codigoPessoa": "001",
+    "lembreteSenha": "pet",
+    "idade": 25,
+    "sexo": "M",
+    "_id": "68cdc5dd4d2582aaf493d09c"
+  },
+  "status": 201,
+  "data": {
+    "id": "68cdc5dd4d2582aaf493d09c",
+    "nome": "João",
+    "email": "joao@email.com",
+    "senha": "123",
+    "codigoPessoa": "001",
+    "lembreteSenha": "pet",
+    "idade": 25,
+    "sexo": "M"
+  }
+}
+```
+## POST
+```
+{
+  "etapa": "POST",
+  "user": {
+    "nome": "Maria",
+    "email": "maria@email.com",
+    "senha": "456",
+    "codigoPessoa": "002",
+    "lembreteSenha": "cidade",
+    "idade": 30,
+    "sexo": "F",
+    "_id": "68cdc5dd4d2582aaf493d09d"
+  },
+  "status": 201,
+  "data": {
+    "id": "68cdc5dd4d2582aaf493d09d",
+    "nome": "Maria",
+    "email": "maria@email.com",
+    "senha": "456",
+    "codigoPessoa": "002",
+    "lembreteSenha": "cidade",
+    "idade": 30,
+    "sexo": "F"
+  }
+}
+```
+## GET ALL
+```
+{
+  "etapa": "GET ALL",
+  "status": 200,
+  "data": [
+    {
+      "id": "68cdb01daf0a189e949d4bb7",
+      "nome": "John Doe",
+      "email": "john.doe@example.com",
+      "senha": "password123",
+      "codigoPessoa": "123456789",
+      "lembreteSenha": "My first pet's name",
+      "idade": 30,
+      "sexo": "Male"
+    },
+    {
+      "id": "68cdb9f24d2582aaf493d096",
+      "nome": "João",
+      "email": "joao@email.com",
+      "senha": "123",
+      "codigoPessoa": "001",
+      "lembreteSenha": "pet",
+      "idade": 25,
+      "sexo": "M"
+    },
+    {
+      "id": "68cdb9f24d2582aaf493d097",
+      "nome": "João",
+      "email": "joao@email.com",
+      "senha": "123",
+      "codigoPessoa": "001",
+      "lembreteSenha": "pet",
+      "idade": 25,
+      "sexo": "M"
+    },
+    {
+      "id": "68cdbbee4d2582aaf493d098",
+      "nome": "João",
+      "email": "joao@email.com",
+      "senha": "123",
+      "codigoPessoa": "001",
+      "lembreteSenha": "pet",
+      "idade": 25,
+      "sexo": "M"
+    },
+    {
+      "id": "68cdbc014d2582aaf493d099",
+      "nome": "João",
+      "email": "joao@email.com",
+      "senha": "123",
+      "codigoPessoa": "001",
+      "lembreteSenha": "pet",
+      "idade": 25,
+      "sexo": "M"
+    },
+    {
+      "id": "68cdbcec4d2582aaf493d09a",
+      "nome": "João",
+      "email": "joao@email.com",
+      "senha": "123",
+      "codigoPessoa": "001",
+      "lembreteSenha": "pet",
+      "idade": 25,
+      "sexo": "M"
+    },
+    {
+      "id": "68cdbdac4d2582aaf493d09b",
+      "nome": "João",
+      "email": "joao@email.com",
+      "senha": "123",
+      "codigoPessoa": "001",
+      "lembreteSenha": "pet",
+      "idade": 25,
+      "sexo": "M"
+    },
+    {
+      "id": "68cdc5dd4d2582aaf493d09c",
+      "nome": "João",
+      "email": "joao@email.com",
+      "senha": "123",
+      "codigoPessoa": "001",
+      "lembreteSenha": "pet",
+      "idade": 25,
+      "sexo": "M"
+    },
+    {
+      "id": "68cdc5dd4d2582aaf493d09d",
+      "nome": "Maria",
+      "email": "maria@email.com",
+      "senha": "456",
+      "codigoPessoa": "002",
+      "lembreteSenha": "cidade",
+      "idade": 30,
+      "sexo": "F"
+    }
+  ]
+}
+```
+## GET BY EMAIL
+```
+{
+  "etapa": "GET BY EMAIL",
+  "email": "joao@email.com",
+  "status": 200,
+  "data": {
+    "id": "68cdb9f24d2582aaf493d096",
+    "nome": "João",
+    "email": "joao@email.com",
+    "senha": "123",
+    "codigoPessoa": "001",
+    "lembreteSenha": "pet",
+    "idade": 25,
+    "sexo": "M"
+  }
+}
+```
+## GET BY EMAIL
+```
+{
+  "etapa": "GET BY EMAIL",
+  "email": "maria@email.com",
+  "status": 200,
+  "data": {
+    "id": "68cdc5dd4d2582aaf493d09d",
+    "nome": "Maria",
+    "email": "maria@email.com",
+    "senha": "456",
+    "codigoPessoa": "002",
+    "lembreteSenha": "cidade",
+    "idade": 30,
+    "sexo": "F"
+  }
+}
+```
+## PUT
+```
+{
+  "etapa": "PUT",
+  "id": "68cdc5dd4d2582aaf493d09c",
+  "status": 404,
+  "data": {
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+    "title": "Not Found",
+    "status": 404,
+    "traceId": "00-ecfeaa63e9a7f5a32d24f6ef0435c124-5af5ad15b1de7f93-00"
+  }
+}
+```
+## PUT
+```
+{
+  "etapa": "PUT",
+  "id": "68cdc5dd4d2582aaf493d09d",
+  "status": 204,
+  "data": ""
+}
+```
+## PATCH
+```
+{
+  "etapa": "PATCH",
+  "id": "68cdc5dd4d2582aaf493d09c",
+  "status": 204,
+  "data": ""
+}
+```
+## PATCH
+```
+{
+  "etapa": "PATCH",
+  "id": "68cdc5dd4d2582aaf493d09d",
+  "status": 204,
+  "data": ""
+}
+```
+## DELETE
+```
+{
+  "etapa": "DELETE",
+  "id": "68cdc5dd4d2582aaf493d09c",
+  "status": 204,
+  "data": ""
+}
+```
+## DELETE
+```
+{
+  "etapa": "DELETE",
+  "id": "68cdc5dd4d2582aaf493d09d",
+  "status": 204,
+  "data": ""
+}
+```
+## GET BY EMAIL (not found)
+```
+{
+  "etapa": "GET BY EMAIL (not found)",
+  "email": "joao@email.com",
+  "status": 200,
+  "data": {
+    "id": "68cdb9f24d2582aaf493d096",
+    "nome": "João",
+    "email": "joao@email.com",
+    "senha": "123",
+    "codigoPessoa": "001",
+    "lembreteSenha": "pet",
+    "idade": 25,
+    "sexo": "M"
+  }
+}
+```
+## GET BY EMAIL (not found)
+```
+{
+  "etapa": "GET BY EMAIL (not found)",
+  "email": "maria@email.com",
+  "status": 404,
+  "data": {
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+    "title": "Not Found",
+    "status": 404,
+    "traceId": "00-0be18b84adf701a85ef198ac5d23bd49-297c5a067503eba0-00"
+  }
+}
+```
